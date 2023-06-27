@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'p2pstyle.css' %}">
+    <title>P2P Shipping</title>
+    <style>
+        .truckbg{
+            background-image: url("{% static 'truck.jpg' %}");
+            background-size:cover;
+            background-position: center;
+            height: 10em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="page-container">
+        <div class="header-bar">
+            <div>
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'p2plogo.png' %}" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-btn-container">
+                {% if user.is_authenticated %}
+                    <a>Logged-in as: {{user.username}}</a>
+                    <a class="nav-btn" href="{% url 'makeorderspage' %}">Place an order</a>
+                    <a class="nav-btn" href="{% url 'vieworderspage' %}">View your orders</a>
+                    {% if user.is_staff %}
+                        <a class="nav-btn" href="{% url 'estimatepricespage' %}">Estimate Prices</a>
+                    {% endif %}
+                    <a class="nav-btn" href="{% url 'logoutpage' %}">Log-out</a>
+
+                {% else %}
+                    <a class="nav-btn" href="{% url 'registerpage' %}">Register</a>
+                    <a class="nav-btn" href="{% url 'loginpage' %}">Log-in</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="content">
+            <div class="truckbg">
+                <h1>Place an Order</h1>
+            </div>
+            <br>
+            <div style="display: flex;align-items: center;flex-direction: column;justify-content: space-between;">
+                <h3>Please fill out the form with the required details.</h3> <br><br>
+                <form method="post" action="{% url 'makeorderspage' %}">
+                    {% csrf_token %}
+                    <div style="display: flex;align-items: center;margin-bottom: 0.7em;justify-content: space-between;">
+                        <p style="margin: 0;margin-right: 1em;">Cargo type:</p>
+                        <input type="text" name="cargo-type" class="o-detail-input" required autofocus>
+                    </div>
+                    <div style="display: flex;align-items: center;margin-bottom: 0.7em;justify-content: space-between;">
+                        <p style="margin: 0;margin-right: 1em;">Weight of cargo:</p>
+                        <input type="number" step="0.01" name="cargo-weight" class="o-detail-input" required>
+                    </div>
+                    <div style="display: flex;align-items: center;margin-bottom: 0.7em;justify-content: space-between;">
+                        <p style="margin: 0;margin-right: 1em;">Duration of shipping:</p>
+                        <input type="number" name="cargo-time" class="o-detail-input" required>
+                    </div>
+                    <div style="display: flex;align-items: center;margin-bottom: 0.7em;justify-content: space-between;">
+                        <p style="margin: 0;margin-right: 1em;">Destination of cargo:</p>
+                        <select name="cargo-place" class="o-detail-input" required>
+                            <option value="">--Choose a destination--</option>
+                            <option value="newdelhi">New Delhi</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="kerala">Kerala</option>
+                        </select>
+                    </div>
+                    <div style="display: flex;align-items: center;margin-bottom: 0.7em;justify-content: space-between;">
+                        <p style="margin: 0;margin-right: 1em;">Your phone number:</p>
+                        <input type="number" name="pnumber" class="o-detail-input" id="pnumber" minlength="9" maxlength="11" required>
+                    </div>
+                    <button type="submit">Submit Order</button>
+                </form>
+            </div>
+            <div style="text-align: center;background-color: black;color:white;position: fixed;bottom: 0px;left:0px;right: 0px;">
+                <p style="margin-top: 3px;margin-bottom: 3px;">Site created by Rohan Fernando ©️2023</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

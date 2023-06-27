@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+html{
+    min-width: 950px;
+}
+body{
+    margin: 0px;
+}
+.header-bar{
+    position: sticky;
+    top: 0;
+    padding: 1em;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+.logo-img{
+    width: 10em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+.content{
+    background-color: #d6d6d6;
+    height: 64em;
+}
+.content *{
+    font-family: 'Noto Sans', sans-serif;   
+}
+.nav-btn-container{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+.nav-btn-container a{
+    color: white;
+    font-size: 1em;
+    font-family: 'Noto Sans', sans-serif;
+    text-decoration: none;
+}
+.nav-btn{
+    color: white;
+    font-size: 1em;
+    font-family: 'Noto Sans', sans-serif;
+    text-decoration: none;
+    border: none;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    border-top: 0.2em solid rgb(0, 0, 0);
+    border-bottom: 0.2em solid rgb(0, 0, 0);
+    transition-duration: 0.2s;
+}
+.nav-btn:hover{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-top: 0.2em solid white;
+    border-bottom: 0.2em solid white;
+}
+.u-detail-input{
+    border:0px;
+    border-bottom: 3px rgb(49, 150, 9) solid;
+    border-radius: 10px;
+}
+.o-detail-input{
+    border:0px;
+    border-bottom: 3px rgb(253, 237, 10) solid;
+    border-radius: 10px;
+    padding: 0.5em;
+    width: 30em;
+    outline: none;
+    transition-duration: 0.2s;
+}
+.o-detail-input:focus{
+    outline: none;
+    border-color: rgb(49, 150, 9);
+    scale: 1.05;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type=number] {
+    appearance: initial;
+    -moz-appearance: textfield;
+}

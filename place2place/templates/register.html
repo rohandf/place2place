@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'p2pstyle.css' %}">
+    <title>P2P Shipping</title>
+    <style>
+        .truckbg{
+            background-image: url("{% static 'truck.jpg' %}");
+            background-size:cover;
+            background-position: center;
+            height: 10em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="page-container">
+        <div class="header-bar">
+            <div>
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'p2plogo.png' %}" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-btn-container">
+                {% if user.is_authenticated %}
+                    <a>Logged-in as: {{user.username}}</a>
+                    <a class="nav-btn" href="{% url 'makeorderspage' %}">Place an order</a>
+                    <a class="nav-btn" href="{% url 'vieworderspage' %}">View your orders</a>
+                    {% if user.is_staff %}
+                        <a class="nav-btn" href="{% url 'estimatepricespage' %}">Estimate Prices</a>
+                    {% endif %}
+                    <a class="nav-btn" href="{% url 'logoutpage' %}">Log-out</a>
+
+                {% else %}
+                    <a class="nav-btn" href="{% url 'registerpage' %}">Register</a>
+                    <a class="nav-btn" href="{% url 'loginpage' %}">Log-in</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="content">
+            <div class="truckbg">
+                <h1>Register a new account</h1>
+            </div>
+            <div style="display: flex;padding-top: 2em; line-height: 2em;flex-direction: column;text-align: center;align-items: center;gap: 1em;justify-content: center;">
+                <form method="post" action="{% url 'registerpage' %}">
+                    {% csrf_token %}
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">Username:</p>
+                        <input type="text" name="uname" required autofocus class="u-detail-input" placeholder="Username" maxlength="20">
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">First Name:</p>
+                        <input type="text" name="fname" required class="u-detail-input" placeholder="First Name" maxlength="20">
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">Last Name:</p>
+                        <input type="text" name="lname" required class="u-detail-input" placeholder="Last Name" maxlength="20">
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">E-mail Address:</p>
+                        <input type="text" name="ename" required class="u-detail-input" placeholder="E-mail" maxlength="60">
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">Password:</p>
+                        <input type="password" name="pword" required class="u-detail-input" placeholder="Password" maxlength="20" autocomplete="off">
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p style="margin: 0px; margin-right: 1em;">Re-enter Password:</p>
+                        <input type="password" name="rpword" required class="u-detail-input" placeholder="Re-enter Password" maxlength="20" autocomplete="off">
+                    </div>
+                    <br>
+                    <button type="submit">Submit</button>
+                </form>
+                <h3 style="color: red;">{{msg}}</h3>
+            </div>
+            <div style="text-align: center;background-color: black;color:white;position: fixed;bottom: 0px;left:0px;right: 0px;">
+                <p style="margin-top: 3px;margin-bottom: 3px;">Site created by Rohan Fernando ©️2023</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
