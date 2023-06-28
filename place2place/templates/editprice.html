@@ -20,6 +20,20 @@
         html{
             background-color: #d6d6d6;
         }
+        .o-details-node{
+            box-shadow: -0.3em -0.5em 0.5em rgb(63, 192, 12), 0.3em .5em 0.5em rgb(221, 190, 12)
+        }
+        .o-detail-input{
+            border-color: rgb(63, 192, 12);
+            transition-duration: 0.1s;
+            border-bottom: 3px rgb(49, 150, 9) solid;
+            border-top: 3px rgb(49, 150, 9) solid;
+        }
+        .o-detail-input:focus{
+            outline: none;
+            border: 3px solid rgb(49, 150, 9);
+            scale: 1;
+        }
     </style>
 </head>
 <body>
@@ -52,24 +66,23 @@
                 <h1>Your Order History</h1>
             </div>
             <br>
-            <div class="o-node-container">
-                {% for order in orders_data %}
-                    <div class="o-details-node">
-                        <h3>Order ID : {{order.order_number}}</h3>
-                        <p>
-                            Cargo Type : {{order.cargo_type}} <br>
-                            Cargo Weight : {{order.cargo_weight}} <br>
-                            Shipping Duration : {{order.delivery_time}} <br>
-                            Destination of Cargo : {{order.cargo_destination}} <br>
-                            Phone Number Provided : {{order.phone_number}} <br>
-                            Order Date : {{order.date_of_order}} <br>
-                        </p>
-                        <p class="price-text">
-                            Price : {{order.price}}
-                        </p>
-                        <a href="/editprice/?order_id={{order.order_number}}"><button class="o-detail-submit">Estimate Price of This Order</button></a>
-                    </div>
-                {% endfor %}
+            <div class="o-details-node">
+                <h3>Order ID : {{order.order_number}}</h3>
+                <p>
+                    Cargo Type : {{order.cargo_type}} <br>
+                    Cargo Weight : {{order.cargo_weight}} <br>
+                    Shipping Duration : {{order.delivery_time}} <br>
+                    Destination of Cargo : {{order.cargo_destination}} <br>
+                    Phone Number Provided : {{order.phone_number}} <br>
+                    Order Date : {{order.date_of_order}} <br>
+                </p>
+                <p id="price-text">Price : {{order.price}}</p>
+                <form action="/editprice/?order_id={{order.order_number}}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="order-id" value="{{order.order_number}}">
+                    <input name="n-price" type="number" placeholder="Enter the new price:" class="o-detail-input" step="0.01">
+                    <button type="submit" class="o-detail-submit">Update Order Price</button>
+                </form>
             </div>
             <div style="text-align: center;background-color: black;color:white;position: fixed;bottom: 0px;left:0px;right: 0px;">
                 <p style="margin-top: 3px;margin-bottom: 3px;">Site created by Rohan Fernando ©️2023</p>
@@ -78,15 +91,11 @@
     </div>
 
     <script>
-        var priceobjects = document.getElementsByClassName('price-text')
-        for(pricetext of priceobjects)
-            {
-            if(pricetext.innerText=='Price : None')
-            {
-                    pricetext.style.color='red'
-                    pricetext.style.fontWeight='bold'
-                    pricetext.innerText='Price Not Yet Estimated.'
-            }
+        var pricetext = document.getElementById('price-text')
+        if(pricetext.innerHTML=='Price : None'){
+            pricetext.style.color='red'
+            pricetext.style.fontWeight='bold'
+            pricetext.innerText='Price Not Yet Estimated.'
         }
     </script>
 

@@ -74,10 +74,38 @@ body{
     border-color: rgb(49, 150, 9);
     scale: 1.05;
 }
+.o-detail-submit{
+    padding: 0.5em;
+    border-radius: 15px;
+    border: 3px solid rgb(49, 150, 9);
+    cursor: pointer;
+    transition-duration: 0.2s;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+.o-detail-submit:hover{
+    scale: 1.2;
+}
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 input[type=number] {
     appearance: initial;
     -moz-appearance: textfield;
+}
+.o-node-container{
+    background-color: rgb(49, 150, 9);
+    width: 90%;
+    margin: 5%;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: calc(1em + 30px);
+    box-shadow: -0.6em -1em 1em rgb(255, 255, 255),0.6em 1em 1em rgba(0, 0, 0, 0.37);
+}
+.o-details-node{
+    padding: 1em;
+    margin: 1em;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: -0.3em -0.5em 0.5em rgb(63, 192, 12), 0.3em .5em 0.5em rgba(0, 0, 0, 0.329);
 }
